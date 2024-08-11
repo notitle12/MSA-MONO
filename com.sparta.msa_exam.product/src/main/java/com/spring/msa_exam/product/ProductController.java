@@ -76,7 +76,7 @@ public class ProductController {
         return new ProductResponseDto(product);
     }
 
-    //테스트
+//    테스트
     @GetMapping("api/{id}")
     public String getProduct(@PathVariable String id) {
         return "Product id " + id + " From port : " + serverPort;

@@ -15,7 +15,7 @@ public interface ProductClient {
 
     @GetMapping("/products/api/{id}")
     String getProduct(@PathVariable("id") String id);
-
+//
 //    @GetMapping("/products")
 //    List<ProductResponseDto> getAllProducts();
 //
