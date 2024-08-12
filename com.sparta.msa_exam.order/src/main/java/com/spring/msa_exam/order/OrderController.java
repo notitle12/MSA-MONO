@@ -1,22 +1,38 @@
 package com.spring.msa_exam.order;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequiredArgsConstructor
+@RequestMapping("/order")
 public class OrderController {
 
     private final OrderService orderService;
 
-    //테스트
-    @GetMapping("/order/{orderId}")
-    public String getOrder(@PathVariable String orderId) {
-        return orderService.getOrder(orderId);
+    @Autowired
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
     }
 
+    @PostMapping
+    public ResponseEntity<OrderResponseDto> createOrder(@RequestBody OrderRequestDto requestDto) {
+        OrderResponseDto responseDto = orderService.createOrder(requestDto);
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @PutMapping("/{orderId}")
+    public ResponseEntity<OrderResponseDto> addProductToOrder(@PathVariable Long orderId, @RequestBody OrderProductRequestDto request) {
+        OrderResponseDto responseDto = orderService.addProductToOrder(orderId, request.getProductId());
+        return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderResponseDto> getOrder(@PathVariable Long orderId) {
+        OrderResponseDto responseDto = orderService.getOrderById(orderId);
+        return ResponseEntity.ok(responseDto);
+    }
 }
 
