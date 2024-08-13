@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: server
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/msa
+#    username: root
+#    password: 123456789a
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+server:
+  port: 19090
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
+  instance:
+    hostname: localhost
+
+
+#    register-with-eureka: false 스스로를 클라이언트로 등록하지 않음
+#    fetch-registry: false 유레카 서버로부터 레지스트리를 가져올지 말지, 일반적으로 false
+
